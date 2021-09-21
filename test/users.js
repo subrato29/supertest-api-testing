@@ -90,4 +90,14 @@ describe ('Users', () => {
            return Promise.reject(err);
        });
     });
+
+    it ('GET /validating an already deleted user: ', () => {
+        return apiUtils.get(request, endpoint_of_specific_user).then((response) => {
+            const statusCode = response.status;
+            return expect(statusCode).to.be.equal(404);
+       }).catch((err) => {
+           return Promise.reject(err);
+       });
+    });
+    
 })
