@@ -13,7 +13,7 @@ describe('Users', () => {
         return apiUtils.get(request, endpoint).then((response) => {
             let statusCode = response.status;
             if(statusCode === 200) { 
-                console.log(response.body.meta.pagination.total);
+                return expect(response.body.meta.pagination.total).to.be.greaterThan(1000); 
             } else {
                 throw new Error('Unexpected status code: ' + statusCode);
             }
