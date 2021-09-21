@@ -68,8 +68,12 @@ describe ('Users', () => {
         return apiUtils.put(request, endpoint_of_specific_user, request_body).then((response) => {
              const statusCode = response.status;
             if (statusCode === 200) {
-                const expectedName= request_body.name;
-                return expect(expectedName).to.be.equal(response.body.data.name);
+                const expectedName = request_body.name;
+                if (createId === response.body.data.id) {
+                    return expect(expectedName).to.be.equal(response.body.data.name);
+                } else {
+                    throw new Error('Expected id not retrieved: ' + createId);
+                }
             } else {
                 throw new Error('Unexpected status code: ' + statusCode);
             }
