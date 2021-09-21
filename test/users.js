@@ -9,6 +9,8 @@ const data = require('../data/data.js');
 
 describe ('Users', () => {
     let createId = '';
+    let response_body_of_specific_user = '';
+    let endpoint_of_specific_user = '';
     it ('GET /retrieve all users: ', () => {
         const endpoint = urls.endpoint.users.list_of_all_users;
         return apiUtils.get(request, endpoint).then((response) => {
@@ -42,10 +44,11 @@ describe ('Users', () => {
 
     it ('GET /retrieve specific user: ', () => {
         let endpoint = urls.endpoint.users.list_of_all_users;
-        endpoint += '/' + createId;
-        return apiUtils.get(request, endpoint).then((response) => {
+        endpoint_of_specific_user = endpoint + '/' + createId;
+        return apiUtils.get(request, endpoint_of_specific_user).then((response) => {
             const statusCode = response.status;
-            if(statusCode === 200) { 
+            if(statusCode === 200) {
+                response_body_of_specific_user = response.body.data; 
                 return expect(createId).to.be.equal(response.body.data.id); 
             } else {
                 throw new Error('Unexpected status code: ' + statusCode);
@@ -53,5 +56,25 @@ describe ('Users', () => {
        }).catch((err) => {
            return Promise.reject(err);
        });
+    });
+
+    it ('PUT /update user: ', () => {
+        const request_body = {
+            'name': response_body_of_specific_user.name + '_Updated',
+            'email': response_body_of_specific_user.email,
+            'gender': response_body_of_specific_user.gender,
+            'status': response_body_of_specific_user.status
+        }
+        return apiUtils.put(request, endpoint_of_specific_user, request_body).then((response) => {
+             const statusCode = response.status;
+            if (statusCode === 200) {
+                const expectedName= request_body.name;
+                return expect(expectedName).to.be.equal(response.body.data.name);
+            } else {
+                throw new Error('Unexpected status code: ' + statusCode);
+            }
+        }).catch((err) => {
+            return Promise.reject(err);
+        });
     });
 })
