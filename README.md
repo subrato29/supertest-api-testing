@@ -49,8 +49,8 @@ Running the tests:
 ```
 Running script without gerenarting html report- npm run test
 
-Running script with generating mochawesome html report- npm run test_mocha
+Running script with generating mochawesome html report- npm run mocha
 
-Running script with generating mocha junit html report- npm run test_junit
+Running script with generating mocha junit html report- npm run junit
 
 ```
