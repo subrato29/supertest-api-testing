@@ -39,4 +39,19 @@ describe ('Users', () => {
             return Promise.reject(err);
         });
     });
+
+    it ('GET /retrieve specific user: ', () => {
+        let endpoint = urls.endpoint.users.list_of_all_users;
+        endpoint += '/' + createId;
+        return apiUtils.get(request, endpoint).then((response) => {
+            const statusCode = response.status;
+            if(statusCode === 200) { 
+                return expect(createId).to.be.equal(response.body.data.id); 
+            } else {
+                throw new Error('Unexpected status code: ' + statusCode);
+            }
+       }).catch((err) => {
+           return Promise.reject(err);
+       });
+    });
 })
