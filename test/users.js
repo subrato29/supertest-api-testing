@@ -6,10 +6,8 @@ import request from '../config/common';
 const urls = require('../config/urls.js');
 const apiUtils = require('../lib/apiUtils.js');
 const data = require('../data/data.js');
-const commonUtils = require('../lib/commonUtils.js');
 
 describe('Users', () => {
-
     it('GET /retrieve all users: ', () => {
         const endpoint = urls.endpoint.users.list_of_all_users;
         return apiUtils.get(request, endpoint).then((response) => {
