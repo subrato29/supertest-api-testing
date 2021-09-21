@@ -81,4 +81,13 @@ describe ('Users', () => {
             return Promise.reject(err);
         });
     });
+
+    it ('DELETE /retrieve specific user: ', () => {
+        return apiUtils.delete(request, endpoint_of_specific_user).then((response) => {
+            const statusCode = response.status;
+            return expect(statusCode).to.be.equal(204);
+       }).catch((err) => {
+           return Promise.reject(err);
+       });
+    });
 })
