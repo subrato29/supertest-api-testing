@@ -11,7 +11,7 @@ describe('Users', () => {
     it('GET /retrieve all users: ', () => {
         const endpoint = urls.endpoint.users.list_of_all_users;
         return apiUtils.get(request, endpoint).then((response) => {
-            let statusCode = response.status;
+            const statusCode = response.status;
             if(statusCode === 200) { 
                 return expect(response.body.meta.pagination.total).to.be.greaterThan(1000); 
             } else {
