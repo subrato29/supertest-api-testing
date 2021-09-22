@@ -101,4 +101,44 @@ describe ('Users', () => {
            return Promise.reject(err);
        });
     });
+
+/*    
+    it ('POST /create multiple user: ', () => {
+        const endpoint = urls.endpoint.users.list_of_all_users;
+        let arrayOfCreateId = [];
+        return new Promise((resolve) => {
+            for (let i = 0; i < 10; i++) {
+                const randomNum = faker.random.number({min:1000, max:9999});
+                const request_body = {
+                    'name': 'Supertest Javascript' + randomNum,
+                    'email': 'Supertest' + randomNum +'@email.com',
+                    'gender': 'male',
+                    'status': 'active'
+                }
+                return apiUtils.post(request, endpoint, request_body).then((response) => {
+                    return response.status;
+               }).then((statusCode) => {
+                   console.log(statusCode);
+                    if (statusCode === 201) {
+                        createId = response.body.data.id;
+                        const expectedEmail = data.request_body.email;
+                        return arrayOfCreateId.push(createId);
+                        //return expect(expectedEmail).to.be.equal(response.body.data.email);
+                    } else {
+                        throw new Error('Unexpected status code: ' + statusCode);
+                    }
+               }).then(() => {
+                   if (i === 9) resolve();
+               })
+               .catch((err) => {
+                   return Promise.reject(err);
+               });
+            }
+        }).then(() => {
+            console.log(arrayOfCreateId);
+            resolve();
+        }).then(() => {
+            done();
+        })
+    }); */
 })
