@@ -102,12 +102,12 @@ describe ('Users', () => {
        });
     });
 
-/*    
-    it ('POST /create multiple user: ', () => {
+   /*it ('POST /create multiple user: ', () => {
         const endpoint = urls.endpoint.users.list_of_all_users;
         let arrayOfCreateId = [];
+        let i = 0;
         return new Promise((resolve) => {
-            for (let i = 0; i < 10; i++) {
+            while (i < 10) {
                 const randomNum = faker.random.number({min:1000, max:9999});
                 const request_body = {
                     'name': 'Supertest Javascript' + randomNum,
@@ -129,10 +129,9 @@ describe ('Users', () => {
                     }
                }).then(() => {
                    if (i === 9) resolve();
+               }).then(() => {
+                   i++;
                })
-               .catch((err) => {
-                   return Promise.reject(err);
-               });
             }
         }).then(() => {
             console.log(arrayOfCreateId);
@@ -140,5 +139,5 @@ describe ('Users', () => {
         }).then(() => {
             done();
         })
-    }); */
+    });*/
 })
