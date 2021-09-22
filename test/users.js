@@ -2,6 +2,7 @@
 
 import { expect } from 'chai';
 import request from '../config/common';
+import faker from 'faker';
 
 const urls = require('../config/urls.js');
 const apiUtils = require('../lib/apiUtils.js');
@@ -11,6 +12,7 @@ describe ('Users', () => {
     let createId = '';
     let response_body_of_specific_user = '';
     let endpoint_of_specific_user = '';
+
     it ('GET /retrieve all users: ', () => {
         const endpoint = urls.endpoint.users.list_of_all_users;
         return apiUtils.get(request, endpoint).then((response) => {
@@ -99,5 +101,4 @@ describe ('Users', () => {
            return Promise.reject(err);
        });
     });
-    
 })
