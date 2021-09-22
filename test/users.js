@@ -2,7 +2,6 @@
 
 import { expect } from 'chai';
 import request from '../config/common';
-import faker from 'faker';
 
 const urls = require('../config/urls.js');
 const apiUtils = require('../lib/apiUtils.js');
