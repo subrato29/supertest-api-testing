@@ -103,7 +103,6 @@ describe ('Users', () => {
 
     it ('GET /validating count of all ids of users: ', () => {
         const endpoint = urls.endpoint.users.list_of_all_users;
-        let arrOfFetchedIds = [];
         return apiUtils.get(request, endpoint).then((response) => {
             const statusCode = response.status;
             if(statusCode === 200) {
