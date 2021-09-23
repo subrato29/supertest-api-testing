@@ -100,4 +100,19 @@ describe ('Users', () => {
            return Promise.reject(err);
        });
     });
+
+    it ('GET /validating count of all ids of users: ', () => {
+        const endpoint = urls.endpoint.users.list_of_all_users;
+        let arrOfFetchedIds = [];
+        return apiUtils.get(request, endpoint).then((response) => {
+            const statusCode = response.status;
+            if(statusCode === 200) {
+                return expect(response.body.data.length).to.be.greaterThan(10); 
+            } else {
+                throw new Error('Unexpected status code: ' + statusCode);
+            }
+        }).catch((err) => {
+            return Promise.reject(err);
+        });
+    });
 })
