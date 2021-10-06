@@ -132,19 +132,20 @@ describe ('Users', () => {
                     }
                     apiUtils.post(request, endpoint, request_body).then((response) => {
                         const statusCode = response.status;
+                        console.log(statusCode);
                         if (statusCode === 201) {
                             countOfSuccessfulPost++;
                             if (countOfSuccessfulPost == countOfAPIHit) {
                                 resolve (countOfSuccessfulPost);
                             }
                         }
-                   });
+                   }).catch(() => {
+                        return Promise.reject();
+                    });
                 }, i * 1000)
             }
         }).then((countOfSuccessfulPost) => {
             Promise.resolve(countOfSuccessfulPost === countOfAPIHit);
-        }).catch((err) => {
-            return Promise.reject(err);
         });
     });
 })
