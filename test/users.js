@@ -143,8 +143,7 @@ describe ('Users', () => {
             }
         }).then((countOfSuccessfulPost) => {
             Promise.resolve(countOfSuccessfulPost === countOfAPIHit);
-        })
-        .catch((err) => {
+        }).catch((err) => {
             return Promise.reject(err);
         });
     });
