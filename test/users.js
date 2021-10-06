@@ -139,13 +139,11 @@ describe ('Users', () => {
                                 resolve (countOfSuccessfulPost);
                             }
                         }
-                   }).catch(() => {
-                        return Promise.reject();
-                    });
+                   });
                 }, i * 1000)
             }
-        }).then((countOfSuccessfulPost) => {
-            Promise.resolve(countOfSuccessfulPost === countOfAPIHit);
+        }).catch((err) => {
+            return Promise.reject(err);
         });
     });
 })
