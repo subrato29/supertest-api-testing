@@ -123,21 +123,23 @@ describe ('Users', () => {
         return new Promise((resolve) => {
             for (let i = 0; i < countOfAPIHit; i++) {
                 const random = commonUtils.getRandomInt(2000, 4000);
-                const request_body = {
-                    'name': 'Supertest_' + random,
-                    'email': 'Supertest_' + random +'@email.com',
-                    'gender': 'male',
-                    'status': 'active'
-                }
-                apiUtils.post(request, endpoint, request_body).then((response) => {
-                    const statusCode = response.status;
-                    if (statusCode === 201) {
-                        countOfSuccessfulPost++;
-                        if (countOfSuccessfulPost == countOfAPIHit) {
-                            resolve (countOfSuccessfulPost);
-                        }
+                setTimeout(() => {
+                    const request_body = {
+                        'name': 'Supertest_' + random,
+                        'email': 'Supertest_' + random +'@email.com',
+                        'gender': 'male',
+                        'status': 'active'
                     }
-               });
+                    apiUtils.post(request, endpoint, request_body).then((response) => {
+                        const statusCode = response.status;
+                        if (statusCode === 201) {
+                            countOfSuccessfulPost++;
+                            if (countOfSuccessfulPost == countOfAPIHit) {
+                                resolve (countOfSuccessfulPost);
+                            }
+                        }
+                   });
+                }, i * 1000)
             }
         }).then((countOfSuccessfulPost) => {
             Promise.resolve(countOfSuccessfulPost === countOfAPIHit);
