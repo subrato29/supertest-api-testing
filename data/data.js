@@ -10,5 +10,6 @@ module.exports = {
         'email': 'Supertest' + randomNum +'@email.com',
         'gender': 'male',
         'status': 'active'
-    }
+    },
+    countOfAPIHit : 2
 }

@@ -5,6 +5,7 @@ import request from '../config/common';
 
 const urls = require('../config/urls.js');
 const apiUtils = require('../lib/apiUtils.js');
+const commonUtils = require('../lib/commonUtils.js');
 const data = require('../data/data.js');
 
 describe ('Users', () => {
@@ -111,6 +112,37 @@ describe ('Users', () => {
                 throw new Error('Unexpected status code: ' + statusCode);
             }
         }).catch((err) => {
+            return Promise.reject(err);
+        });
+    });
+
+    it ('POST /multiple create user: ', () => {
+        const endpoint = urls.endpoint.users.list_of_all_users;
+        let countOfSuccessfulPost = 0;
+        const countOfAPIHit = data.countOfAPIHit;
+        return new Promise((resolve) => {
+            for (let i = 0; i < countOfAPIHit; i++) {
+                const random = commonUtils.getRandomInt(2000, 4000);
+                const request_body = {
+                    'name': 'Supertest_' + random,
+                    'email': 'Supertest_' + random +'@email.com',
+                    'gender': 'male',
+                    'status': 'active'
+                }
+                apiUtils.post(request, endpoint, request_body).then((response) => {
+                    const statusCode = response.status;
+                    if (statusCode === 201) {
+                        countOfSuccessfulPost++;
+                        if (countOfSuccessfulPost == countOfAPIHit) {
+                            resolve (countOfSuccessfulPost);
+                        }
+                    }
+               });
+            }
+        }).then((countOfSuccessfulPost) => {
+            Promise.resolve(countOfSuccessfulPost === countOfAPIHit);
+        })
+        .catch((err) => {
             return Promise.reject(err);
         });
     });
