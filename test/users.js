@@ -135,12 +135,18 @@ describe ('Users', () => {
                         console.log('Status code: ' + statusCode + ' for iteration_' + i);
                         if (statusCode === 201) {
                             countOfSuccessfulPost++;
-                            if (countOfSuccessfulPost === countOfAPIHit) {
-                                resolve ();
+                            if (i === countOfAPIHit - 1) {
+                                resolve (countOfSuccessfulPost);
                             }
                         }
                    });
                 }, i * 100)
+            }
+        }).then((countOfSuccessfulPost) => {
+            if (countOfSuccessfulPost === countOfAPIHit) {
+                return Promise.resolve();
+            } else {
+                return Promise.reject('Required count of API hit is NOT done: ' + countOfSuccessfulPost);
             }
         }).catch((err) => {
             return Promise.reject(err);

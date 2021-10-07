@@ -11,5 +11,5 @@ module.exports = {
         'gender': 'male',
         'status': 'active'
     },
-    countOfAPIHit : 5
+    countOfAPIHit : 10
 }
