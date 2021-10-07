@@ -122,25 +122,25 @@ describe ('Users', () => {
         const countOfAPIHit = data.countOfAPIHit;
         return new Promise((resolve) => {
             for (let i = 0; i < countOfAPIHit; i++) {
-                const random = commonUtils.getRandomInt(2000, 4000);
+                const random = commonUtils.getRandomInt(5000, 20000);
                 setTimeout(() => {
                     const request_body = {
-                        'name': 'Supertest_' + random,
-                        'email': 'Supertest_' + random +'@email.com',
+                        'name': 'Supertest_' + random + '_' + i,
+                        'email': 'Supertest_' + random + '_' + i + '@email.com',
                         'gender': 'male',
                         'status': 'active'
                     }
                     apiUtils.post(request, endpoint, request_body).then((response) => {
                         const statusCode = response.status;
-                        console.log(statusCode);
+                        console.log('Status code: ' + statusCode + ' for iteration_' + i);
                         if (statusCode === 201) {
                             countOfSuccessfulPost++;
-                            if (countOfSuccessfulPost == countOfAPIHit) {
-                                resolve (countOfSuccessfulPost);
+                            if (countOfSuccessfulPost === countOfAPIHit) {
+                                resolve ();
                             }
                         }
                    });
-                }, i * 1000)
+                }, i * 100)
             }
         }).catch((err) => {
             return Promise.reject(err);
