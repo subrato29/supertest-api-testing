@@ -132,7 +132,7 @@ describe ('Users', () => {
                     }
                     apiUtils.post(request, endpoint, request_body).then((response) => {
                         const statusCode = response.status;
-                        console.log('Status code: ' + statusCode + ' for iteration_' + i);
+                        console.log('POST call status code: ' + statusCode + ' for iteration_' + i);
                         if (statusCode === 201) {
                             countOfSuccessfulPost++;
                             if (i === countOfAPIHit - 1) {
