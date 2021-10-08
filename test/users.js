@@ -146,7 +146,8 @@ describe ('Users', () => {
             if (countOfSuccessfulPost === countOfAPIHit) {
                 return Promise.resolve();
             } else {
-                return Promise.reject('Required count of API hit is NOT done: ' + countOfSuccessfulPost);
+                return Promise.reject('Expected count of API post call: ' + countOfAPIHit +
+                ' but actual count of API post call: ' +  countOfSuccessfulPost);
             }
         }).catch((err) => {
             return Promise.reject(err);
